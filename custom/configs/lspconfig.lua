@@ -4,6 +4,18 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require("lspconfig")
 local util = require "lspconfig/util"
 
+lspconfig.intelephense.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    intelephense = {
+      files = {
+        maxSize = 5000000; -- Aumente este valor se você tiver arquivos grandes
+      }
+    }
+  }
+}
+
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,

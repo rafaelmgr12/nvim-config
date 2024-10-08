@@ -3,8 +3,13 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "gopls",
-        "pyright",
+        "gopls",            -- Go
+        "pyright",          -- Python
+        -- Adicionando PHP aqui
+        "intelephense",     -- PHP LSP
+        "php-cs-fixer",     -- PHP Formatter
+        "phpmd",            -- PHP Linter
+        "php-debug-adapter" -- PHP Debugger
       },
     },
   },
@@ -34,8 +39,7 @@ local plugins = {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    ft = "go",
-    ft = "python",
+    ft = { "go", "python", "php" },
     opts = function()
       return require "custom.configs.null-ls"
     end,
