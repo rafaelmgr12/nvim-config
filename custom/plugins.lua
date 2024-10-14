@@ -159,5 +159,53 @@ local plugins = {{
           }
       }
   end
+}, {
+  'iamcco/markdown-preview.nvim',
+  build = function()
+      vim.fn['mkdp#util#install']() -- Build the plugin on installation
+  end,
+  ft = {'markdown', 'md'}, -- Load for Markdown files
+  config = function()
+      -- Customize markdown-preview.nvim
+      vim.g.mkdp_auto_start = 0 -- Don't auto-start preview when opening a Markdown file
+      vim.g.mkdp_auto_close = 1 -- Auto-close preview when closing the Markdown buffer
+      vim.g.mkdp_refresh_slow = 0 -- Refresh as you type
+      vim.g.mkdp_command_for_global = 0 -- Use browser commands locally instead of globally
+      vim.g.mkdp_browser = '' -- Let the plugin pick the default browser
+      vim.g.mkdp_open_to_the_world = 0 -- Open in the local network (set 1 to access from other devices)
+      vim.g.mkdp_open_ip = '127.0.0.1' -- Only local IP for opening
+      vim.g.mkdp_preview_options = {
+          mkit = {}, -- Markdown-it options
+          katex = {}, -- KaTeX options for rendering math
+          uml = {}, -- PlantUML options
+          maid = {}, -- Mermaid options for diagrams
+          disable_sync_scroll = 0, -- Disable synchronized scrolling between preview and editor
+          sync_scroll_type = 'middle', -- How scroll synchronization works
+          hide_yaml_meta = 1, -- Hide YAML metadata in the preview
+          sequence_diagrams = {}, -- Sequence diagram options
+          flowchart_diagrams = {}, -- Flowchart options
+          content_editable = false, -- Enable content editing in the preview window
+          disable_filename = 0 -- Display the filename in the preview window
+      }
+      vim.g.mkdp_markdown_css = '' -- Custom CSS for Markdown preview
+      vim.g.mkdp_highlight_css = '' -- Custom CSS for code highlighting
+      vim.g.mkdp_port = '8080' -- Port for the preview server
+  end,
+  keys = {{
+      '<leader>mp',
+      ':MarkdownPreview<CR>',
+      desc = "Start Markdown Preview"
+  }, -- Start Markdown Preview with <leader>mp
+  {
+      '<leader>ms',
+      ':MarkdownPreviewStop<CR>',
+      desc = "Stop Markdown Preview"
+  }, -- Stop Markdown Preview with <leader>ms
+  {
+      '<leader>mt',
+      ':MarkdownPreviewToggle<CR>',
+      desc = "Toggle Markdown Preview"
+  } -- Toggle Markdown Preview with <leader>mt
+  }
 }}
 return plugins
